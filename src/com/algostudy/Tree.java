@@ -11,22 +11,17 @@ public class Tree {
 		int N = Integer.parseInt(st.nextToken());
 		int C = Integer.parseInt(st.nextToken());
 		int W = Integer.parseInt(st.nextToken());
-		int[][] money = new int[N][10001];
 		int[] tree = new int[N];
+		int max = 0;
 		for (int i = 0; i < N; i++)
 			tree[i] = Integer.parseInt(in.readLine());
 		for (int i = 0; i < N; i++) {
+			int count = 0;
 			for (int j = 1; j < 10001; j++) {
 				if (j > tree[i]) break;
-					money[i][j] = j * (tree[i] / j * W) - (tree[i] - 1) / j * C;
-			}
-		}
-		int max = 0;
-		for (int j = 1; j < 10001; j++) {
-			int count = 0;
-			for (int i = 0; i < N; i++) {
-				if (money[i][j] >= 0)
-					count += money[i][j];
+					int temp = j * (tree[i] / j * W) - (tree[i] - 1) / j * C;
+					if (temp >= 0)
+						count += temp;
 			}
 			max = Math.max(max, count);
 		}
